@@ -31,6 +31,8 @@ class HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: const <Widget>[
         // children: <Widget>[
         //   Card(
@@ -52,8 +54,9 @@ class HomePageState extends State<HomePage> {
             ),
           ),
           Card(
+            color: Colors.red,
             child: Text("List of tx"),
-          )
+          ),
         ],
       ) // This trailing comma makes auto-formatting nicer for build methods.
     );
