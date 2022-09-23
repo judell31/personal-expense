@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expense/transaction.dart';
 
 import 'home.page.dart';
 
 class HomePageState extends State<HomePage> {
   int _counter = 0;
+
+  final List<Transaction> transactions = [
+    Transaction(
+        id: "t1",
+        title: "New shoes",
+        amount: 69.99,
+        date: DateTime.now()
+    ),
+    Transaction(
+        id: "t2",
+        title: "Games",
+        amount: 69.99,
+        date: DateTime.now()
+    ),
+  ];
 
   void _incrementCounter() {
     setState(() {
@@ -33,8 +49,8 @@ class HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const <Widget>[
-          SizedBox(
+        children: <Widget>[
+          const SizedBox(
             width: double.infinity,
             child: Card(
               color: Colors.blue,
@@ -42,10 +58,14 @@ class HomePageState extends State<HomePage> {
               child: Text("Chart!"),
             ),
           ),
-          Card(
-            color: Colors.red,
-            child: Text("List of tx"),
-          ),
+          Column(
+            children: transactions.map(
+                    (tx) {
+                      return Card(
+                        child: Text(tx.title),
+                      );
+                    }).toList(),
+          )
         ],
       ) // This trailing comma makes auto-formatting nicer for build methods.
     );
