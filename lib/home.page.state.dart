@@ -62,7 +62,20 @@ class HomePageState extends State<HomePage> {
             children: transactions.map(
                     (tx) {
                       return Card(
-                        child: Text(tx.title),
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              child: Text(tx.amount.toString()
+                              ),
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Text(tx.title),
+                                Text(tx.date.toString()),
+                              ],
+                            )
+                          ],
+                        ),
                       );
                     }).toList(),
           )
