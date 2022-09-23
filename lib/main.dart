@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expense/transaction.dart';
 
 import 'home.page.dart';
 
 void main() {
-  runApp(const PersonalExpense());
+  runApp(PersonalExpense());
 }
 
 class PersonalExpense extends StatelessWidget {
-  const PersonalExpense({super.key});
+  PersonalExpense({super.key});
+
+  final List<Transaction> transactions = [
+    Transaction(
+        id: "t1",
+        title: "New shoes",
+        amount: 69.99,
+        date: DateTime.now()
+    ),
+    Transaction(
+        id: "t2",
+        title: "Games",
+        amount: 69.99,
+        date: DateTime.now()
+    ),
+  ];
 
   // This widget is the root of your application.
   @override
