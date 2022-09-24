@@ -64,8 +64,24 @@ class HomePageState extends State<HomePage> {
                       return Card(
                         child: Row(
                           children: <Widget>[
-                            SizedBox(
-                              child: Text(tx.amount.toString()
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 50
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.blue,
+                                  width: 2,
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Text(tx.amount.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.blue
+                                ),
                               ),
                             ),
                             Column(
