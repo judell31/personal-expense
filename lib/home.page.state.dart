@@ -85,9 +85,21 @@ class HomePageState extends State<HomePage> {
                               ),
                             ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(tx.title),
-                                Text(tx.date.toString()),
+                                Text(
+                                  tx.title,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                Text(
+                                    tx.date.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.grey
+                                  ),
+                                ),
                               ],
                             )
                           ],
