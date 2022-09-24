@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'home.page.dart';
 
 void main() {
-  runApp(PersonalExpense());
+  runApp(const PersonalExpense());
 }
 
 class PersonalExpense extends StatelessWidget {
-  PersonalExpense({super.key});
+  const PersonalExpense({super.key});
 
   // This widget is the root of your application.
   @override

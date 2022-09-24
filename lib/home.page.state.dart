@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:personal_expense/transaction.dart';
 
 import 'home.page.dart';
 
 class HomePageState extends State<HomePage> {
-  int _counter = 0;
-
   final List<Transaction> transactions = [
     Transaction(
         id: "t1",
@@ -20,17 +19,6 @@ class HomePageState extends State<HomePage> {
         date: DateTime.now()
     ),
   ];
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +64,9 @@ class HomePageState extends State<HomePage> {
                                 ),
                               ),
                               padding: const EdgeInsets.all(10),
-                              child: Text(tx.amount.toString(),
+                              child: Text(
+                                "\$${tx.amount}",
+                                //tx.amount.toString(),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
@@ -95,7 +85,9 @@ class HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 Text(
-                                    tx.date.toString(),
+                                  DateFormat.yMMMd().format(tx.date),
+                                  // DateFormat("MM-dd-yyyy").format(tx.date),
+                                  // tx.date.toString(),
                                   style: const TextStyle(
                                     color: Colors.grey
                                   ),
