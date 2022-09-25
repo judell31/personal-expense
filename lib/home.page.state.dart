@@ -24,7 +24,7 @@ class HomePageState extends State<HomePage> {
   // late String amountInput;
 
   final titleController = TextEditingController();
-  final ammountController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class HomePageState extends State<HomePage> {
                     decoration: const InputDecoration(
                         labelText: "Amount"
                     ),
-                    controller: ammountController,
+                    controller: amountController,
                     // onChanged: (value) => amountInput = value,
                   ),
                   TextButton(
