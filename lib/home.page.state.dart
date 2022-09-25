@@ -20,6 +20,12 @@ class HomePageState extends State<HomePage> {
     ),
   ];
 
+  // late String titleInput;
+  // late String amountInput;
+
+  final titleController = TextEditingController();
+  final ammountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -52,18 +58,28 @@ class HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    decoration: const InputDecoration(
                       labelText: "Title"
                     ),
+                    controller: titleController,
+                    // onChanged: (value) {
+                    //   titleInput = value;
+                    // },
                   ),
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    decoration: const InputDecoration(
                         labelText: "Amount"
                     ),
+                    controller: ammountController,
+                    // onChanged: (value) => amountInput = value,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // print(titleInput);
+                      // print(amountInput);
+                      print(titleController.text);
+                    },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blueAccent
                     ),
