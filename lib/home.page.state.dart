@@ -35,7 +35,7 @@ class HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const SizedBox(
@@ -45,6 +45,33 @@ class HomePageState extends State<HomePage> {
               elevation: 5,
               child: Text("Chart!"),
             ),
+          ),
+          Card(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  const TextField(
+                    decoration: InputDecoration(
+                      labelText: "Title"
+                    ),
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                        labelText: "Amount"
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.blueAccent
+                    ),
+                    child: const Text("Add Transaction"),
+                  ),
+                ],
+              ),
+            )
           ),
           Column(
             children: transactions.map(
