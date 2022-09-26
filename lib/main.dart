@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expense/transaction.list.dart';
+import 'package:personal_expense/user.transactions.dart';
 
-import 'new.transaction.dart';
+import 'transaction.form.dart';
 
 // void main() {
 //   runApp(const PersonalExpense());
@@ -55,8 +56,8 @@ class HomePage extends StatelessWidget {
         body: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            const SizedBox(
+          children: const <Widget>[
+            SizedBox(
               width: double.infinity,
               child: Card(
                 color: Colors.blue,
@@ -64,6 +65,7 @@ class HomePage extends StatelessWidget {
                 child: Text("Chart!"),
               ),
             ),
+            UserTransactions()
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.
     );

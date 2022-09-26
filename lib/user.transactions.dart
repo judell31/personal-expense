@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:personal_expense/transaction.list.dart';
 
 import 'models/transaction.dart';
-import 'new.transaction.dart';
+import 'transaction.form.dart';
 
 class UserTransactions extends StatefulWidget {
   const UserTransactions({Key? key}) : super(key: key);
@@ -27,12 +27,26 @@ class _UserTransactionsState extends State<UserTransactions> {
     ),
   ];
 
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+        id: DateTime.now().toString(),
+        title: txTitle,
+        amount: txAmount,
+        date: DateTime.now()
+    );
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        NewTransaction(),
-        TransactionList()
+        //With () it executes without it passes the function
+        NewTransaction(_addNewTransaction),
+        TransactionList(_userTransactions)
       ],
     );
   }
