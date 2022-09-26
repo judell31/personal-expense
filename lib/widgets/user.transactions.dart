@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:personal_expense/transaction.list.dart';
+import 'package:personal_expense/widgets/transaction.list.dart';
 
-import 'models/transaction.dart';
+import '../models/transaction.dart';
 import 'transaction.form.dart';
 
 class UserTransactions extends StatefulWidget {

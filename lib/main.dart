@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense/transaction.list.dart';
-import 'package:personal_expense/user.transactions.dart';
+import 'package:personal_expense/widgets/transaction.list.dart';
+import 'package:personal_expense/widgets/user.transactions.dart';
 
-import 'transaction.form.dart';
+import 'widgets/transaction.form.dart';
 
 // void main() {
 //   runApp(const PersonalExpense());
@@ -53,21 +53,38 @@ class HomePage extends StatelessWidget {
           // the App.build method, and use it to set our appbar title.
           title: const Text("Personal Expense"),
         ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
-            SizedBox(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text("Chart!"),
-              ),
-            ),
-            UserTransactions()
-          ],
-        ) // This trailing comma makes auto-formatting nicer for build methods.
+        body: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: const <Widget>[
+                SizedBox(
+                  width: double.infinity,
+                  child: Card(
+                    color: Colors.blue,
+                    elevation: 5,
+                    child: Text("Chart!"),
+                  ),
+                ),
+                UserTransactions()
+              ],
+            ) // This trailing comma makes auto-formatting nicer for build methods.,
+        )
+        // body: Column(
+        //   // mainAxisAlignment: MainAxisAlignment.start,
+        //   crossAxisAlignment: CrossAxisAlignment.stretch,
+        //   children: const <Widget>[
+        //     SizedBox(
+        //       width: double.infinity,
+        //       child: Card(
+        //         color: Colors.blue,
+        //         elevation: 5,
+        //         child: Text("Chart!"),
+        //       ),
+        //     ),
+        //     UserTransactions()
+        //   ],
+        // ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
