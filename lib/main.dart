@@ -38,7 +38,6 @@ class PersonalExpense extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -55,21 +54,21 @@ class HomePage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const <Widget>[
-                SizedBox(
-                  width: double.infinity,
-                  child: Card(
-                    color: Colors.blue,
-                    elevation: 5,
-                    child: Text("Chart!"),
-                  ),
-                ),
-                UserTransactions()
-              ],
-            ) // This trailing comma makes auto-formatting nicer for build methods.,
-        )
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const <Widget>[
+            SizedBox(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blue,
+                elevation: 5,
+                child: Text("Chart!"),
+              ),
+            ),
+            UserTransactions()
+          ],
+        ) // This trailing comma makes auto-formatting nicer for build methods.,
+            )
         // body: Column(
         //   // mainAxisAlignment: MainAxisAlignment.start,
         //   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,6 +84,6 @@ class HomePage extends StatelessWidget {
         //     UserTransactions()
         //   ],
         // ) // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        );
   }
 }
