@@ -35,8 +35,8 @@ class _UserTransactionsState extends State<UserTransactions> {
     return Column(
       children: <Widget>[
         //With () it executes without it passes the function
-        NewTransaction(_addNewTransaction),
-        TransactionList(_userTransactions)
+        TransactionForm(_addNewTransaction),
+        // TransactionList(_userTransactions)
       ],
     );
   }

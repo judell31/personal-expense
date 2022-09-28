@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_expense/widgets/transaction.list.dart';
 import 'package:personal_expense/widgets/user.transactions.dart';
 
+import 'models/transaction.dart';
 import 'widgets/transaction.form.dart';
 
 // void main() {
@@ -35,8 +36,44 @@ class PersonalExpense extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Transaction> _userTransactions = [
+    Transaction(
+        id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
+    Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
+  ];
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: TransactionForm(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+        id: DateTime.now().toString(),
+        title: txTitle,
+        amount: txAmount,
+        date: DateTime.now());
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +90,7 @@ class HomePage extends StatelessWidget {
           title: const Text("Personal Expense"),
           actions: <Widget>[
             IconButton(
-              onPressed: () {},
+              onPressed: () => _startAddNewTransaction(context),
               icon: const Icon(Icons.add),
             )
           ],
@@ -62,8 +99,8 @@ class HomePage extends StatelessWidget {
             child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
-            SizedBox(
+          children: <Widget>[
+            const SizedBox(
               width: double.infinity,
               child: Card(
                 color: Colors.blue,
@@ -71,13 +108,13 @@ class HomePage extends StatelessWidget {
                 child: Text("Chart!"),
               ),
             ),
-            UserTransactions()
+            TransactionList(_userTransactions),
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
             ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => _startAddNewTransaction(context),
           child: const Icon(Icons.add),
         )
         // body: Column(
