@@ -51,6 +51,12 @@ class HomePage extends StatelessWidget {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: const Text("Personal Expense"),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            )
+          ],
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -68,7 +74,12 @@ class HomePage extends StatelessWidget {
             UserTransactions()
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
-            )
+            ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        )
         // body: Column(
         //   // mainAxisAlignment: MainAxisAlignment.start,
         //   crossAxisAlignment: CrossAxisAlignment.stretch,
