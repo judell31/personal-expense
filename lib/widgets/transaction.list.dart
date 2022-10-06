@@ -27,7 +27,7 @@ class TransactionList extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColorDark,
                       width: 2,
                     ),
                   ),
@@ -35,10 +35,11 @@ class TransactionList extends StatelessWidget {
                   child: Text(
                     "\$${transactions[index].amount.toStringAsFixed(2)}",
                     //tx.amount.toString(),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.blue),
+                        color: Theme.of(context).primaryColorDark
+                    ),
                   ),
                 ),
                 Column(
