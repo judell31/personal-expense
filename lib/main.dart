@@ -65,9 +65,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
-    Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
+    // Transaction(
+    //     id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
+    // Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
   ];
 
   void _startAddNewTransaction(BuildContext ctx) {
@@ -76,8 +76,8 @@ class _HomePageState extends State<HomePage> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: TransactionForm(_addNewTransaction),
           behavior: HitTestBehavior.opaque,
+          child: TransactionForm(_addNewTransaction),
         );
       },
     );
