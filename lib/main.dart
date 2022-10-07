@@ -20,6 +20,23 @@ class PersonalExpense extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expense',
       theme: ThemeData(
+        textTheme: ThemeData.light().textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: "OpenSans",
+            fontWeight: FontWeight.bold,
+            fontSize: 18
+          )
+        ),
+        appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light().textTheme.copyWith(
+                titleLarge: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                )
+            ).headline6,
+        ),
+        fontFamily: 'Quicksand',
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
