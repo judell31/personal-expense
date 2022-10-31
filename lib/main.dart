@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expense/widgets/chart.dart';
 import 'package:personal_expense/widgets/transaction.list.dart';
 import 'package:personal_expense/widgets/user.transactions.dart';
 
@@ -65,10 +66,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
-    // Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
+    Transaction(
+        id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
+    Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
@@ -120,14 +131,7 @@ class _HomePageState extends State<HomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const SizedBox(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text("Chart!"),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
