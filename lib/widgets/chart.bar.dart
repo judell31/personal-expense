@@ -27,6 +27,10 @@ class ChartBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              // Expanded(
+              //   flex: 5,
+              //   fit: FlexFit.tight
+              // ),
               FractionallySizedBox(
                 heightFactor: spendingPctOfTotal,
                 child: Container(
