@@ -4,14 +4,15 @@ import 'package:personal_expense/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function deleteTx;
 
   // TransactionList({Key? key}) : super(key: key);
-  const TransactionList(this.transactions, {super.key});
+  const TransactionList(this.transactions, this.deleteTx, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 450,
       // ListView.builder() optimize only load whats visible
       child: transactions.isEmpty ? Column(
         children: <Widget>[
@@ -64,6 +65,11 @@ class TransactionList extends StatelessWidget {
               ),
               subtitle: Text(
                 DateFormat.yMMMd().format(transactions[index].date),
+              ),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                onPressed: () => deleteTx(transactions[index].id),
               ),
             ),
           );

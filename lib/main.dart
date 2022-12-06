@@ -21,7 +21,7 @@ class PersonalExpense extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expense',
       theme: ThemeData(
-        textTheme: ThemeData.light().textTheme.copyWith(
+      textTheme: ThemeData.light().textTheme.copyWith(
           titleLarge: const TextStyle(
             fontFamily: "OpenSans",
             fontWeight: FontWeight.bold,
@@ -110,6 +110,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -136,7 +142,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction)
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
             ),

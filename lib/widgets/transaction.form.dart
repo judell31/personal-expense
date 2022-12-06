@@ -103,7 +103,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 onPressed: _addTransaction,
                 style: TextButton.styleFrom(foregroundColor: Colors.white),
                 // TODO: look at this
-                // style: TextButton.styleFrom(foregroundColor: Theme.of(context).textTheme.titleLarge.),
+                // style: TextButton.styleFrom(foregroundColor: Theme.of(context).textTheme.),
                 child: const Text("Add Transaction"),
               ),
             ],
