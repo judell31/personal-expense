@@ -124,25 +124,34 @@ class _HomePageState extends State<HomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    final appBar =  AppBar(
+      // Here we take the value from the MyHomePage object that was created by
+      // the App.build method, and use it to set our appbar title.
+      title: const Text("Personal Expense"),
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => _startAddNewTransaction(context),
+          icon: const Icon(Icons.add),
+        )
+      ],
+    );
+
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: const Text("Personal Expense"),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () => _startAddNewTransaction(context),
-              icon: const Icon(Icons.add),
-            )
-          ],
-        ),
+        appBar: appBar,
         body: SingleChildScrollView(
             child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction)
+            SizedBox(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4,
+              child: Chart(_recentTransactions),
+            ),
+            SizedBox(
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.6,
+              child: TransactionList(_userTransactions, _deleteTransaction),
+            )
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
             ),
