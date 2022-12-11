@@ -11,7 +11,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return transactions.isEmpty ? Column(
+    return transactions.isEmpty ? LayoutBuilder(builder: (context, constraints) {
+      return Column(
         children: <Widget>[
           Text(
             "No Transactions added yet!",
@@ -21,14 +22,15 @@ class TransactionList extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: 200,
+            height: constraints.maxHeight * 0.6,
             child: Image.asset(
               "assets/images/waiting.png",
               fit: BoxFit.cover,
             ),
           ),
         ],
-      ) : ListView.builder(
+      );
+    }) : ListView.builder(
       // child: ListView(
         // renders when elements are off screen
         // child: Column(

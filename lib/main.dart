@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expense/widgets/chart.dart';
 import 'package:personal_expense/widgets/transaction.list.dart';
-import 'package:personal_expense/widgets/user.transactions.dart';
 
 import 'models/transaction.dart';
 import 'widgets/transaction.form.dart';
@@ -10,7 +9,16 @@ import 'widgets/transaction.form.dart';
 //   runApp(const PersonalExpense());
 // }
 
-void main() => runApp(const PersonalExpense());
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //     [
+  //       DeviceOrientation.portraitUp,
+  //       DeviceOrientation.portraitDown
+  //     ]
+  // );
+  runApp(const PersonalExpense());
+}
 
 class PersonalExpense extends StatelessWidget {
   const PersonalExpense({super.key});
@@ -69,10 +77,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
-    Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
+    // Transaction(
+    //     id: "t1", title: "New shoes", amount: 69.99, date: DateTime.now()),
+    // Transaction(id: "t2", title: "Games", amount: 69.99, date: DateTime.now()),
   ];
+
+  bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -125,6 +135,8 @@ class _HomePageState extends State<HomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar =  AppBar(
       // Here we take the value from the MyHomePage object that was created by
       // the App.build method, and use it to set our appbar title.
@@ -137,6 +149,11 @@ class _HomePageState extends State<HomePage> {
       ],
     );
 
+    final txListWidget = SizedBox(
+      height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+      child: TransactionList(_userTransactions, _deleteTransaction),
+    );
+
     return Scaffold(
         appBar: appBar,
         body: SingleChildScrollView(
@@ -144,14 +161,29 @@ class _HomePageState extends State<HomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
+            if (isLandscape) Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text("Show Chart"),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                )],
+            ),
+            if (!isLandscape) SizedBox(
               height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
               child: Chart(_recentTransactions),
             ),
-            SizedBox(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
-              child: TransactionList(_userTransactions, _deleteTransaction),
-            )
+            if (!isLandscape) txListWidget,
+            if (isLandscape) _showChart ?
+               SizedBox(
+                 height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+                 child: Chart(_recentTransactions),
+               ) : txListWidget
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
             ),
