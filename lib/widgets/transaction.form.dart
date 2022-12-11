@@ -56,58 +56,66 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              TextField(
-                decoration: const InputDecoration(labelText: "Title"),
-                controller: _titleController,
-                onSubmitted: (_) => _addTransaction(),
-                // onChanged: (value) {
-                //   titleInput = value;
-                // },
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: "Amount"),
-                controller: _amountController,
-                keyboardType: TextInputType.number,
-                onSubmitted: (_) => _addTransaction(), // (_) get an arg but i don't care about it or use it
-                // onChanged: (value) => amountInput = value,
-              ),
-              SizedBox(
-                height: 70,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null ?
-                        "No Date Chosen!" :
-                        'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}', // TODO: ?
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: _addDate,
-                      style: TextButton.styleFrom(foregroundColor: Colors.blueAccent),
-                      child: const Text(
-                        "Choose Date",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
+    return SingleChildScrollView(
+      child: Card(
+          elevation: 5,
+          child: Container(
+            padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 10
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                TextField(
+                  decoration: const InputDecoration(labelText: "Title"),
+                  controller: _titleController,
+                  onSubmitted: (_) => _addTransaction(),
+                  // onChanged: (value) {
+                  //   titleInput = value;
+                  // },
                 ),
-              ),
-              ElevatedButton(
-                onPressed: _addTransaction,
-                style: TextButton.styleFrom(foregroundColor: Colors.white),
-                // TODO: look at this
-                // style: TextButton.styleFrom(foregroundColor: Theme.of(context).textTheme.),
-                child: const Text("Add Transaction"),
-              ),
-            ],
-          ),
-        ));
+                TextField(
+                  decoration: const InputDecoration(labelText: "Amount"),
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  onSubmitted: (_) => _addTransaction(), // (_) get an arg but i don't care about it or use it
+                  // onChanged: (value) => amountInput = value,
+                ),
+                SizedBox(
+                  height: 70,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          _selectedDate == null ?
+                          "No Date Chosen!" :
+                          'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}', // TODO: ?
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: _addDate,
+                        style: TextButton.styleFrom(foregroundColor: Colors.blueAccent),
+                        child: const Text(
+                          "Choose Date",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _addTransaction,
+                  style: TextButton.styleFrom(foregroundColor: Colors.white),
+                  // TODO: look at this
+                  // style: TextButton.styleFrom(foregroundColor: Theme.of(context).textTheme.),
+                  child: const Text("Add Transaction"),
+                ),
+              ],
+            ),
+          )),
+    );
   }
 }
