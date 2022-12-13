@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:personal_expense/widgets/chart.dart';
 import 'package:personal_expense/widgets/transaction.list.dart';
@@ -138,8 +140,8 @@ class _HomePageState extends State<HomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar =  AppBar(
       // Here we take the value from the MyHomePage object that was created by
@@ -154,7 +156,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     final txListWidget = SizedBox(
-      height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+      height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
 
@@ -169,7 +171,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text("Show Chart"),
-                Switch(
+                Switch.adaptive(
                   value: _showChart,
                   onChanged: (value) {
                     setState(() {
@@ -179,20 +181,20 @@ class _HomePageState extends State<HomePage> {
                 )],
             ),
             if (!isLandscape) SizedBox(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.3,
+              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.3,
               child: Chart(_recentTransactions),
             ),
             if (!isLandscape) txListWidget,
             if (isLandscape) _showChart ?
                SizedBox(
-                 height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.7,
+                 height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
                  child: Chart(_recentTransactions),
                ) : txListWidget
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
             ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: Platform.isIOS ? FloatingActionButton(
           onPressed: () => _startAddNewTransaction(context),
           child: const Icon(Icons.add),
         )
