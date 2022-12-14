@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -69,6 +72,9 @@ class _TransactionFormState extends State<TransactionForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
+                // CupertinoTextField(
+                //
+                // ),
                 TextField(
                   decoration: const InputDecoration(labelText: "Title"),
                   controller: _titleController,
@@ -95,7 +101,15 @@ class _TransactionFormState extends State<TransactionForm> {
                           'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}', // TODO: ?
                         ),
                       ),
-                      TextButton(
+                      Platform.isIOS ? CupertinoButton(
+                        onPressed: _addDate,
+                        child: const Text(
+                          "Choose Date",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ) : TextButton(
                         onPressed: _addDate,
                         style: TextButton.styleFrom(foregroundColor: Colors.blueAccent),
                         child: const Text(

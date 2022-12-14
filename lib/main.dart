@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_expense/widgets/chart.dart';
 import 'package:personal_expense/widgets/transaction.list.dart';
@@ -28,6 +29,47 @@ class PersonalExpense extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    /*
+    Platform.isIOS ? const CupertinoApp(
+      title: 'Personal Expense',
+      theme: CupertinoThemeData(
+          textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: const TextStyle(
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18
+              ),
+              labelSmall: const TextStyle(
+                color: Colors.white,
+              )
+          ),
+          appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light().textTheme.copyWith(
+                titleLarge: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                )
+            ).headline6,
+          ),
+          fontFamily: 'Quicksand',
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.green
+          )
+              .copyWith(secondary: Colors.amber)
+      ),
+      home: const HomePage(),
+    )
+     */
     return MaterialApp(
       title: 'Personal Expense',
       theme: ThemeData(
@@ -142,11 +184,24 @@ class _HomePageState extends State<HomePage> {
     // than having to individually change instances of widgets.
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
+    const String appTitle = "Personal Expense";
 
-    final appBar =  AppBar(
+    final Widget appBar = Platform.isIOS ? CupertinoNavigationBar(
+      middle: const Text(appTitle),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          GestureDetector(
+            child: const Icon(
+              CupertinoIcons.add
+            ),
+            onTap: () => _startAddNewTransaction(context),
+          )
+        ]),
+    ) : AppBar(
       // Here we take the value from the MyHomePage object that was created by
       // the App.build method, and use it to set our appbar title.
-      title: const Text("Personal Expense"),
+      title: const Text(appTitle),
       actions: <Widget>[
         IconButton(
           onPressed: () => _startAddNewTransaction(context),
@@ -156,21 +211,23 @@ class _HomePageState extends State<HomePage> {
     );
 
     final txListWidget = SizedBox(
-      height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
+      height: (mediaQuery.size.height - (appBar).preferredSize.height - mediaQuery.padding.top) * 0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
 
-    return Scaffold(
-        appBar: appBar,
-        body: SingleChildScrollView(
-            child: Column(
+    final pageBody = SafeArea(
+        child: SingleChildScrollView(
+        child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (isLandscape) Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text("Show Chart"),
+                Text(
+                  "Show Chart",
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 Switch.adaptive(
                   value: _showChart,
                   onChanged: (value) {
@@ -186,15 +243,23 @@ class _HomePageState extends State<HomePage> {
             ),
             if (!isLandscape) txListWidget,
             if (isLandscape) _showChart ?
-               SizedBox(
-                 height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
-                 child: Chart(_recentTransactions),
-               ) : txListWidget
+            SizedBox(
+              height: (mediaQuery.size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7,
+              child: Chart(_recentTransactions),
+            ) : txListWidget
           ],
         ) // This trailing comma makes auto-formatting nicer for build methods.,
-            ),
+    ));
+
+    return Platform.isIOS ? CupertinoPageScaffold(
+      navigationBar: appBar,
+      child: pageBody,
+    ) : Scaffold(
+        appBar: appBar,
+        body: pageBody,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Platform.isIOS ? FloatingActionButton(
+        // floatingActionButton: Platform.isIOS ? FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () => _startAddNewTransaction(context),
           child: const Icon(Icons.add),
         )
