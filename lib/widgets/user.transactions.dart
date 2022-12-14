@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:personal_expense/widgets/transaction.list.dart';
 
 import '../models/transaction.dart';
 import 'transaction.form.dart';
